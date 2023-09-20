@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/lerenn/asyncapi-codegen/pkg/asyncapi"
+	"github.com/obouchet/asyncapi-codegen/pkg/asyncapi"
 	"github.com/stoewer/go-strcase"
 )
 

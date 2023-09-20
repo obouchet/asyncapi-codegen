@@ -8,7 +8,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/lerenn/asyncapi-codegen/pkg/extensions/brokers/nats"
+	"github.com/obouchet/asyncapi-codegen/pkg/extensions/brokers/nats"
 )
 
 func main() {

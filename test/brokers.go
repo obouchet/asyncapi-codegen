@@ -3,9 +3,9 @@ package asyncapi_test
 import (
 	"testing"
 
-	"github.com/lerenn/asyncapi-codegen/pkg/extensions"
-	"github.com/lerenn/asyncapi-codegen/pkg/extensions/brokers/kafka"
-	"github.com/lerenn/asyncapi-codegen/pkg/extensions/brokers/nats"
+	"github.com/obouchet/asyncapi-codegen/pkg/extensions"
+	"github.com/obouchet/asyncapi-codegen/pkg/extensions/brokers/kafka"
+	"github.com/obouchet/asyncapi-codegen/pkg/extensions/brokers/nats"
 )
 
 // BrokerControllers returns a list of BrokerController to test based on the

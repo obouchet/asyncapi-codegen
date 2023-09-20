@@ -1,30 +1,25 @@
-# Issue: https://github.com/obouchet/asyncapi-codegen/issues/74
-
-# Tt was failing when headers properties were defined as a reference to a schema
-# instead of a plain list of properties.
-
 asyncapi: 2.6.0
 info:
   title: test
   version: 1.0.0
   description: test
 channels:
-  testChannel:
-    description: test channel
+  channel:
+    description: channel
     publish:
       message:
-        $ref: '#/components/messages/Test'
+        $ref: '#/components/messages/Message'
 components:
   messages:
-    Test:
+    Message:
       description: test message
       headers:
-        $ref: '#/components/schemas/Header'      
+        $ref: '#/components/schemas/HeaderSchema'      
       payload:        
         oneOf:
           - $ref: '#/components/schemas/TestSchema'
   schemas:
-    Header:
+    HeaderSchema:
       type: object
       description: header
       required:
@@ -36,21 +31,24 @@ components:
           type: string
           example: '1.0.1'
         dateTime:
-            description: Date in UTC format "YYYY-MM-DDThh:mm:ss.sZ".
+            description: Date when the event was generated. UTC format "YYYY-MM-DDThh:mm:ss.sZ".
             example: '2023-09-15T20:15:58.0Z'
             type: string
             format: date-time
     TestSchema:
       type: object
       required:
-        - obj1
+        - prop1
       properties:
-        obj1:
+        prop1:
           type: object
           required:
             - referenceId
           properties:
             referenceId:
-              description: reference ID.
+              description: Unique Id used as an alias to the card number.
               type: string
               example: "1234567890123456"
+
+                
+

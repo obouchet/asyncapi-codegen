@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/lerenn/asyncapi-codegen/pkg/codegen"
+	"github.com/obouchet/asyncapi-codegen/pkg/codegen"
 )
 
 var (

@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/lerenn/asyncapi-codegen/pkg/extensions"
-	"github.com/lerenn/asyncapi-codegen/pkg/extensions/middlewares"
-	"github.com/lerenn/asyncapi-codegen/pkg/utils"
-	asyncapi_test "github.com/lerenn/asyncapi-codegen/test"
+	"github.com/obouchet/asyncapi-codegen/pkg/extensions"
+	"github.com/obouchet/asyncapi-codegen/pkg/extensions/middlewares"
+	"github.com/obouchet/asyncapi-codegen/pkg/utils"
+	asyncapi_test "github.com/obouchet/asyncapi-codegen/test"
 	"github.com/stretchr/testify/suite"
 )
 

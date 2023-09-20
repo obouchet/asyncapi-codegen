@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/ghodss/yaml"
-	"github.com/lerenn/asyncapi-codegen/pkg/asyncapi"
+	"github.com/obouchet/asyncapi-codegen/pkg/asyncapi"
 )
 
 // FromFile parses the AsyncAPI specification either from a YAML file or a JSON file.

@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/lerenn/asyncapi-codegen/pkg/utils"
 	"github.com/mohae/deepcopy"
+	"github.com/obouchet/asyncapi-codegen/pkg/utils"
 )
 
 // Message is a representation of the corresponding asyncapi object filled
