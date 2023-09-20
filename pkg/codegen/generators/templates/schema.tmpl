@@ -14,7 +14,11 @@
     {{else if and $value.ReferenceTo $value.ReferenceTo.Description}}
     // Description: {{$value.ReferenceTo.Description}}
     {{end -}}
-    {{namify $key}} {{if and (not (isRequired $ $key)) (ne $value.Type "array")}}*{{end}}{{template "schema" $value}} `json:"{{snakeCase $key}}"`
+    {{namify $key}} {{if and (not (isRequired $ $key)) (ne $value.Type "array")}}*{{end}}{{template "schema" $value}} `json:"{{snakeCase $key}}"
+    {{- if and (isRequired $ $key) (eq .Type "string")}} validate:"required"
+    {{- else if and (isRequired $ $key) (eq .Type "String")}} validate:"requiredString"
+    {{- else if and (isRequired $ $key) (eq .Type "Integer")}} validate:"requiredInteger"
+    {{- end}}`
     {{end -}}
 }
 
@@ -29,6 +33,14 @@ time.Time
 {{- else -}}
 string
 {{- end -}}
+
+{{- /* Type Custom String */ -}}
+{{- else if eq .Type "String" -}}
+String
+
+{{- /* Type Custom Integer */ -}}
+{{- else if eq .Type "Integer" -}}
+Integer
 
 {{- /* Type Integer */ -}}
 {{- else if eq .Type "integer" -}}
