@@ -30,7 +30,7 @@ type Message struct {
 }
 
 // Process processes the Message to make it ready for code generation.
-func (msg *Message) Process(name string, spec Specification) {
+func (msg *Message) Process(name string, spec Specification, useStandardGoJson bool) {
 	msg.Name = utils.UpperFirstLetter(name)
 
 	// Add pointer to reference if there is one
@@ -40,16 +40,16 @@ func (msg *Message) Process(name string, spec Specification) {
 
 	// Process Headers and Payload
 	if msg.Headers != nil {
-		msg.Headers.Process(name+"Headers", spec, false)
+		msg.Headers.Process(name+"Headers", spec, false, useStandardGoJson)
 	}
 	if msg.Payload != nil {
-		msg.Payload.Process(name+"Payload", spec, false)
+		msg.Payload.Process(name+"Payload", spec, false, useStandardGoJson)
 	}
 
 	// Process OneOf
 	for k, v := range msg.OneOf {
 		// Process the OneOf
-		v.Process(name+strconv.Itoa(k), spec)
+		v.Process(name+strconv.Itoa(k), spec, useStandardGoJson)
 
 		// Merge the OneOf as one payload
 		msg.MergeWith(spec, *v)

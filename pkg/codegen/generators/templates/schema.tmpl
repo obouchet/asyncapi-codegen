@@ -14,7 +14,12 @@
     {{else if and $value.ReferenceTo $value.ReferenceTo.Description}}
     // Description: {{$value.ReferenceTo.Description}}
     {{end -}}
-    {{namify $key}} {{if and (not (isRequired $ $key)) (ne $value.Type "array")}}*{{end}}{{template "schema" $value}} `json:"{{snakeCase $key}}"
+    {{namify $key}} {{if and (not (isRequired $ $key)) (ne $value.Type "array")}}*{{end}}{{template "schema" $value}} `json:
+    {{- if .UseStandardGoJson -}}
+    "{{standardGoJson $key}}"
+    {{- else -}}
+    "{{snakeCase $key}}"
+    {{- end -}}
     {{- if and (isRequired $ $key) (eq .Type "string")}} validate:"required"
     {{- else if and (isRequired $ $key) (eq .Type "String")}} validate:"requiredString"
     {{- else if and (isRequired $ $key) (eq .Type "Integer")}} validate:"requiredInteger"

@@ -10,15 +10,15 @@ type Components struct {
 }
 
 // Process processes the Components structure to make it ready for code generation.
-func (c *Components) Process(spec Specification) {
+func (c *Components) Process(spec Specification, useStandardGoJson bool) {
 	// For all messages, process message
 	for name, msg := range c.Messages {
-		msg.Process(name, spec)
+		msg.Process(name, spec, useStandardGoJson)
 	}
 
 	// For all schemas, process schema
 	for name, schema := range c.Schemas {
-		schema.Process(name, spec, false)
+		schema.Process(name, spec, false, useStandardGoJson)
 	}
 
 	// For all parameters, process param

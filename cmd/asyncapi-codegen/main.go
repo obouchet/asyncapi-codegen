@@ -10,7 +10,7 @@ import (
 func run() int {
 	flags := ProcessFlags()
 
-	cg, err := codegen.FromFile(flags.InputPath)
+	cg, err := codegen.FromFile(flags.InputPath, flags.UseStandardGoJson)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err.Error())
 		return 255

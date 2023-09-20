@@ -36,6 +36,7 @@ func templateFunctions() template.FuncMap {
 	return template.FuncMap{
 		"namify":                         templates.Namify,
 		"snakeCase":                      templates.SnakeCase,
+		"standardGoJson":                 templates.StandardGoJson,
 		"referenceToStructAttributePath": templates.ReferenceToStructAttributePath,
 		"referenceToTypeName":            templates.ReferenceToTypeName,
 		"channelToMessageTypeName":       templates.ChannelToMessageTypeName,

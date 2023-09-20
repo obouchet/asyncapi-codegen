@@ -26,6 +26,7 @@ type Schema struct {
 
 	// Embedded extended fields
 	Extensions
+	UseStandardGoJson bool
 }
 
 // NewSchema creates a new Schema structure with initialized fields.
@@ -37,7 +38,8 @@ func NewSchema() Schema {
 }
 
 // Process processes the Schema structure to make it ready for code generation.
-func (a *Schema) Process(name string, spec Specification, isRequired bool) {
+func (a *Schema) Process(name string, spec Specification, isRequired bool, useStandardGoJson bool) {
+	a.UseStandardGoJson = useStandardGoJson
 	a.Name = utils.UpperFirstLetter(name)
 
 	// Add pointer to reference if there is one
@@ -47,17 +49,17 @@ func (a *Schema) Process(name string, spec Specification, isRequired bool) {
 
 	// Process Properties
 	for n, p := range a.Properties {
-		p.Process(n, spec, utils.IsInSlice(a.Required, n))
+		p.Process(n, spec, utils.IsInSlice(a.Required, n), useStandardGoJson)
 	}
 
 	// Process Items
 	if a.Items != nil {
-		a.Items.Process(name+"Items", spec, false)
+		a.Items.Process(name+"Items", spec, false, useStandardGoJson)
 	}
 
 	// Process AnyOf
 	for _, v := range a.AnyOf {
-		v.Process(name+"AnyOf", spec, false)
+		v.Process(name+"AnyOf", spec, false, useStandardGoJson)
 
 		// Merge with other fields as one struct (invalidate references)
 		a.MergeWith(spec, *v)
@@ -65,7 +67,7 @@ func (a *Schema) Process(name string, spec Specification, isRequired bool) {
 
 	// Process OneOf
 	for _, v := range a.OneOf {
-		v.Process(name+"OneOf", spec, false)
+		v.Process(name+"OneOf", spec, false, useStandardGoJson)
 
 		// Merge with other fields as one struct (invalidate references)
 		a.MergeWith(spec, *v)
@@ -73,7 +75,7 @@ func (a *Schema) Process(name string, spec Specification, isRequired bool) {
 
 	// Process AllOf
 	for _, v := range a.AllOf {
-		v.Process(name+"AllOf", spec, false)
+		v.Process(name+"AllOf", spec, false, useStandardGoJson)
 
 		// Merge with other fields as one struct (invalidate references)
 		a.MergeWith(spec, *v)

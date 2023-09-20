@@ -12,14 +12,17 @@ type Specification struct {
 	Info       Info                `json:"info"`
 	Channels   map[string]*Channel `json:"channels"`
 	Components Components          `json:"components"`
+
+	// ---
+	UseCustomGoJson bool
 }
 
 // Process processes the Specification to make it ready for code generation.
-func (s *Specification) Process() {
+func (s *Specification) Process(useStandardGoJson bool) {
 	for path, ch := range s.Channels {
-		ch.Process(path, *s)
+		ch.Process(path, *s, useStandardGoJson)
 	}
-	s.Components.Process(*s)
+	s.Components.Process(*s, useStandardGoJson)
 }
 
 // GetPublishSubscribeCount gets the count of 'publish' channels and the count

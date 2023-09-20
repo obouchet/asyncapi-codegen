@@ -21,7 +21,7 @@ type Channel struct {
 }
 
 // Process processes the Channel to make it ready for code generation.
-func (c *Channel) Process(path string, spec Specification) {
+func (c *Channel) Process(path string, spec Specification, useStandardGoJson bool) {
 	// Set channel name and path
 	c.Name = utils.UpperFirstLetter(path)
 	c.Path = path
@@ -38,7 +38,7 @@ func (c *Channel) Process(path string, spec Specification) {
 	}
 
 	// Process message
-	msg.Process(msgName, spec)
+	msg.Process(msgName, spec, useStandardGoJson)
 
 	// Process parameters
 	for n, p := range c.Parameters {

@@ -11,7 +11,7 @@ import (
 )
 
 // FromFile parses the AsyncAPI specification either from a YAML file or a JSON file.
-func FromFile(path string) (CodeGen, error) {
+func FromFile(path string, useStandardGoJson bool) (CodeGen, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return CodeGen{}, err
@@ -19,33 +19,33 @@ func FromFile(path string) (CodeGen, error) {
 
 	switch filepath.Ext(path) {
 	case ".yaml", ".yml":
-		return FromYAML(data)
+		return FromYAML(data, useStandardGoJson)
 	case ".json":
-		return FromJSON(data)
+		return FromJSON(data, useStandardGoJson)
 	default:
 		return CodeGen{}, fmt.Errorf("%w: %q", ErrInvalidFileFormat, path)
 	}
 }
 
 // FromYAML parses the AsyncAPI specification from a YAML file.
-func FromYAML(data []byte) (CodeGen, error) {
+func FromYAML(data []byte, useStandardGoJson bool) (CodeGen, error) {
 	data, err := yaml.YAMLToJSON(data)
 	if err != nil {
 		return CodeGen{}, err
 	}
 
-	return FromJSON(data)
+	return FromJSON(data, useStandardGoJson)
 }
 
 // FromJSON parses the AsyncAPI specification from a JSON file.
-func FromJSON(data []byte) (CodeGen, error) {
+func FromJSON(data []byte, useStandardGoJson bool) (CodeGen, error) {
 	var spec asyncapi.Specification
 
 	if err := json.Unmarshal(data, &spec); err != nil {
 		return CodeGen{}, err
 	}
 
-	spec.Process()
+	spec.Process(useStandardGoJson)
 
 	return New(spec), nil
 }

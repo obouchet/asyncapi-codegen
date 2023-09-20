@@ -54,7 +54,7 @@ func (cg CodeGen) Generate(opt Options) error {
 			part, err = cg.generateUser()
 			opt.Generate.User = false
 		case opt.Generate.Types:
-			part, err = cg.generateTypes()
+			part, err = cg.generateTypes(opt.UseStandardGoJson)
 			opt.Generate.Types = false
 		default:
 			remainingParts = false
@@ -99,8 +99,8 @@ func (cg CodeGen) generateImports(opts Options) (string, error) {
 	}.Generate()
 }
 
-func (cg CodeGen) generateTypes() (string, error) {
-	return generators.TypesGenerator{Specification: cg.Specification}.Generate()
+func (cg CodeGen) generateTypes(useStandardGoJson bool) (string, error) {
+	return generators.TypesGenerator{Specification: cg.Specification}.Generate(useStandardGoJson)
 }
 
 func (cg CodeGen) generateApp() (string, error) {

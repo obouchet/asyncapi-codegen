@@ -27,6 +27,22 @@ func Namify(sentence string) string {
 	return correctAcronyms(sentence)
 }
 
+func StandardGoJson(sentence string) string {
+	// Remove everything except alphanumerics and '_'
+	re := regexp.MustCompile("[^a-zA-Z0-9_]")
+	sentence = string(re.ReplaceAll([]byte(sentence), []byte("_")))
+
+	// Remove leading numbers
+	re = regexp.MustCompile("^[0-9]+")
+	sentence = string(re.ReplaceAll([]byte(sentence), []byte("")))
+
+	// Snake case to lower Camel case
+	sentence = strcase.LowerCamelCase(sentence)
+
+	// Correct acronyms
+	return correctAcronyms(sentence)
+}
+
 func correctAcronyms(sentence string) string {
 	acronyms := []string{"ID"}
 	for _, a := range acronyms {

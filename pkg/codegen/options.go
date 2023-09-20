@@ -18,4 +18,6 @@ type Options struct {
 	// DisableFormatting states if the formatting should be disabled when
 	// writing the generated code
 	DisableFormatting bool
+
+	UseStandardGoJson bool
 }

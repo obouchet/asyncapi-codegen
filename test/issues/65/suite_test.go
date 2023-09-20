@@ -31,7 +31,7 @@ func (suite *Suite) TestExtensionsWithSchema() {
 	}
 
 	// Generate code and test result
-	res, err := generators.TypesGenerator{Specification: spec}.Generate()
+	res, err := generators.TypesGenerator{Specification: spec}.Generate(false)
 	suite.Require().NoError(err)
 	suite.Require().True(regexp.MustCompile("FlagSchema +uint8").Match([]byte(res)))
 }
@@ -56,7 +56,7 @@ func (suite *Suite) TestExtensionsWithObjectProperty() {
 	}
 
 	// Generate code and test result
-	res, err := generators.TypesGenerator{Specification: spec}.Generate()
+	res, err := generators.TypesGenerator{Specification: spec}.Generate(false)
 	suite.Require().NoError(err)
 	suite.Require().True(regexp.MustCompile("Flag +uint8").Match([]byte(res)))
 }
@@ -78,7 +78,7 @@ func (suite *Suite) TestExtensionsWithArrayItem() {
 	}
 
 	// Generate code and test result
-	res, err := generators.TypesGenerator{Specification: spec}.Generate()
+	res, err := generators.TypesGenerator{Specification: spec}.Generate(false)
 	suite.Require().NoError(err)
 	suite.Require().True(regexp.MustCompile(`FlagsSchema +\[\]uint8`).Match([]byte(res)))
 }
@@ -103,7 +103,7 @@ func (suite *Suite) TestExtensionsWithObjectPropertyAndTypeFromPackage() {
 	}
 
 	// Generate code and test result
-	res, err := generators.TypesGenerator{Specification: spec}.Generate()
+	res, err := generators.TypesGenerator{Specification: spec}.Generate(false)
 	suite.Require().NoError(err)
 	suite.Require().True(regexp.MustCompile(`Flag +mypackage.Flag`).Match([]byte(res)))
 }
