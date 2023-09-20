@@ -39,8 +39,7 @@ func StandardGoJson(sentence string) string {
 	// Snake case to lower Camel case
 	sentence = strcase.LowerCamelCase(sentence)
 
-	// Correct acronyms
-	return correctAcronyms(sentence)
+	return sentence
 }
 
 func correctAcronyms(sentence string) string {
