@@ -23,7 +23,7 @@
     {{- if and (isRequired $ $key) (eq .Type "string")}} validate:"required"
     {{- else if and (isRequired $ $key) (eq .Type "String")}} validate:"requiredString"
     {{- else if and (isRequired $ $key) (eq .Type "Integer")}} validate:"requiredInteger"
-    {{- else if and (isRequired $ $key) (eq .Type "Float64")}} validate:"requiredFloat64"
+    {{- else if and (isRequired $ $key) (eq .Type "Number") (eq .Format "double")}} validate:"requiredFloat64"
     {{- end}}`
     {{end -}}
 }
@@ -49,7 +49,7 @@ String
 Integer
 
 {{- /* Type Custom Float64 */ -}}
-{{- else if eq .Type "Float64" -}}
+{{- else if and (eq .Type "Number") (eq .Format "double") -}}
 Float64
 
 {{- /* Type Integer */ -}}
