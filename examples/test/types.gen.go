@@ -20,7 +20,7 @@ type MessageMessage struct {
 	Payload struct {
 		Prop1 struct {
 			// Description: Unique Id used as an alias to the card number.
-			ReferenceID string `json:"referenceId" validate:"required"`
+			ReferenceID string `json:"reference_id" validate:"required"`
 		} `json:"prop1"`
 	}
 }
@@ -89,7 +89,7 @@ func (msg MessageMessage) toBrokerMessage() (extensions.BrokerMessage, error) {
 // Description: header
 type HeaderSchemaSchema struct {
 	// Description: Date when the event was generated. UTC format "YYYY-MM-DDThh:mm:ss.sZ".
-	DateTime time.Time `json:"dateTime" validate:"required"`
+	DateTime time.Time `json:"date_time" validate:"required"`
 
 	// Description: Schema version
 	Version string `json:"version" validate:"required"`
@@ -99,6 +99,6 @@ type HeaderSchemaSchema struct {
 type TestSchemaSchema struct {
 	Prop1 struct {
 		// Description: Unique Id used as an alias to the card number.
-		ReferenceID string `json:"referenceId" validate:"required"`
+		ReferenceID string `json:"reference_id" validate:"required"`
 	} `json:"prop1"`
 }
